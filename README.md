@@ -36,3 +36,11 @@ Every prediction is paired with a Grad-CAM heatmap showing which region of the i
 *Note: Grad-CAM heatmaps are normalized per-image, so visual intensity alone can be misleading — always cross-reference with the actual predicted probability (verified: 93.7% for the real defect vs. 4.6% for the clean image shown above).*
 
 ## Architecture
+
+
+**Key components:**
+- **`src/dataset.py` / `src/dataloaders.py`** — custom PyTorch `Dataset` and `DataLoader` for loading Severstal images and multi-label targets
+- **`src/train.py`** — fine-tunes ResNet50 with class-weighted `BCEWithLogitsLoss`
+- **`src/evaluate.py`** — computes per-class recall/precision to validate the imbalance fix
+- **`src/gradcam.py`** — generates Grad-CAM heatmaps for model interpretability
+- **`app/gradio_app.py`** — Gradio web interface for real-time image upload and inference
